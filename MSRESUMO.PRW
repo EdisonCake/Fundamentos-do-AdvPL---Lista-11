@@ -88,6 +88,7 @@ Static Function Top(cAlias)
     oPrint:Say(nLinha, 020, "FORNECEDOR", oFont12,, AZUL)
     oPrint:Say(nLinha, 200, "LOJA.FORN.", oFont12,, AZUL)
     oPrint:Say(nLinha, 320, "PAGAMENTO" , oFont12,, AZUL)
+    oPrint:Say(nLinha, 485, "EMISSÃO"   , oFont12,, AZUL)
 
     nLinha += 5
     oPrint:Line(nLinha, 15, nLinha, 580,, '-6')
@@ -99,7 +100,10 @@ Static Function Top(cAlias)
 
     oPrint:Say(nLinha, 200, alltrim((cAlias)->(C7_LOJA)), oFont12,, VERMELHO)
     oPrint:Say(nLinha, 320, alltrim((cAlias)->(C7_COND)) + " - " + alltrim((cAlias)->(E4_DESCRI)), oFont12,, VERMELHO)
+    cString := DtoC(StoD((cAlias)->(C7_EMISSAO)))
+    oPrint:Say(nLinha, 485, cString, oFont12,, VERMELHO)
     nLinha += 30
+
 
     oPrint:Say(nLinha, 020, "CÓDIGO",   oFont12,, AZUL)
     oPrint:Say(nLinha, 200, "PRODUTO",  oFont12,, AZUL)

@@ -46,10 +46,11 @@ Static Function GeraCons()
 Return cAlias
 
 Static Function MontaRel(cAlias)
-    local cCaminho := "C:\Users\ediso\Desktop\"
-    local cArquivo := "Detalhes_Pedidos.pdf"
-    local cPedido := ""
-    local nTotPed := 0
+    local cCaminho  := "C:\Users\ediso\Desktop\"
+    local cArquivo  := "Detalhes_Pedidos.pdf"
+    local cPedido   := ""
+    local nTotPed   := 0
+    local nPage     := 0
 
     private nLinha := LINHA_1
     private oPrint
@@ -80,15 +81,22 @@ Static Function MontaRel(cAlias)
 
                 nTotped := 0
 
-                
                 oPrint:EndPage()
                 oPrint:StartPage()
 
+                nPage++
+                oPrint:Say(820, 530, cvaltochar(nPage), oFont10,, AZUL)
+
                 nLinha := LINHA_1
                 Top(cAlias)
+
             else
                 nLinha := LINHA_1
                 Top(cAlias)
+
+                nPage++
+                oPrint:Say(820, 530, cvaltochar(nPage), oFont10,, AZUL)
+
             endif
         endif
     
@@ -127,6 +135,7 @@ Static Function Top(cAlias)
     oPrint:Say(nLinha, 020, "FORNECEDOR", oFont12,, AZUL)
     oPrint:Say(nLinha, 200, "LOJA.FORN.", oFont12,, AZUL)
     oPrint:Say(nLinha, 320, "PAGAMENTO" , oFont12,, AZUL)
+    oPrint:Say(nLinha, 485, "EMISSÃO"   , oFont12,, AZUL)
 
     nLinha += 5
     oPrint:Line(nLinha, 15, nLinha, 580,, '-6')
@@ -138,7 +147,10 @@ Static Function Top(cAlias)
 
     oPrint:Say(nLinha, 200, alltrim((cAlias)->(C7_LOJA)), oFont12,, VERMELHO)
     oPrint:Say(nLinha, 320, alltrim((cAlias)->(C7_COND)) + " - " + alltrim((cAlias)->(E4_DESCRI)), oFont12,, VERMELHO)
+    cString := DtoC(StoD((cAlias)->(C7_EMISSAO)))
+    oPrint:Say(nLinha, 485, cString, oFont12,, VERMELHO)
     nLinha += 30
+
 
     oPrint:Say(nLinha, 020, "CÓDIGO",   oFont12,, AZUL)
     oPrint:Say(nLinha, 200, "PRODUTO",  oFont12,, AZUL)
